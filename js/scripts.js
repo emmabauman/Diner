@@ -1,11 +1,7 @@
-document.addEventListener("DOMContentLoaded", function () {
-    const hamburgerElement = document.querySelector('#myButton');
-    const navElement = document.querySelector('.menuLinks');
+const hamburgerElement = document.querySelector('#myButton')
+const navElement = document.querySelector('.menuLinks')
 
-    if (hamburgerElement && navElement) {
-        hamburgerElement.addEventListener('click', () => {
-            const isOpen = navElement.classList.toggle('open');
-            hamburgerElement.textContent = isOpen ? "✖" : "☰"; // Change button text dynamically
-        });
-    }
-});
+hamburgerElement.addEventListener('click', () => {
+    hamburgerElement.classList.toggle('open')
+    navElement.classList.toggle('open')
+})

@@ -1,25 +1,38 @@
-header,
-nav,
-main {
-    max-width: 960px;
-    margin: auto;
+#headerWrapper header img {
+    display: block;
+    /* width handled responsively via clamp in _small.scss */
+    height: auto;
 }
 
-/* NAVIGATION STUFF GOES HERE */
+div.allcards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: $gutter;
+    /* sections will size automatically within the grid */
+}
+
+footer div {
+    display: grid;
+    grid-template-columns: auto auto;
+    align-items: center;
+}
+
+/* Nav styles at medium and up */
 #myButton {
-    display: block;
+    display: none;
+}
+
+ul.menuLinks {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+ul.menuLinks li {
+    border: none;
 }
 
 ul.menuLinks li a {
-    padding: .4rem 1rem;
-}
-
-ul.menuLinks,
-ul.menuLinks.open {
-    display: flex;
-    justify-content: flex-end;
-}
-
-ul.menuLinks a:hover {
-    background-color: $secondaryColor;
+    color: white;
+    padding: .5rem 1rem;
 }
