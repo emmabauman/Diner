@@ -36,3 +36,11 @@ ul.menuLinks li a {
     color: white;
     padding: .5rem 1rem;
 }
+
+    /* header text scale at medium */
+    #headerWrapper header span {
+            font-size: 1.5rem;
+    }
+        #navWrapper {
+            /* inherit background-color (mobile-first) to keep nav green across breakpoints */
+        }

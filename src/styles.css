@@ -319,10 +319,10 @@ div.allcards {
   gap: 1.5rem;
 }
 div.allcards section {
-  border: 1px solid yellow;
+  border: 1px solid rgba(0, 0, 0, 0.06);
   border-radius: 12px;
   overflow: hidden;
-  background-color: pink;
+  background-color: #f8efe0;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
@@ -369,7 +369,10 @@ div.allcards section:hover {
 
 /* Navigation - mobile first */
 #navWrapper {
-  background-color: green;
+  background-color: green; /* green nav on small screens */
+  /* subtle divider to separate nav from main content */
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  padding-bottom: 0.5rem;
 }
 
 nav {
@@ -381,16 +384,36 @@ nav {
 
 /* Header adjustments for small screens */
 #headerWrapper header {
-  padding: 0.25rem 1rem;
+  padding: 0.75rem 1rem;
   gap: 8px;
+  background-color: #f8efe0; /* light cream header background for contrast */
 }
 
 #headerWrapper header img {
   display: block;
-  /* responsive logo: min 18px, scales with viewport, max 40px */
-  width: clamp(18px, 6vw, 40px);
+  /* responsive logo: larger across all sizes - min 24px, scales with viewport, max 64px */
+  width: clamp(24px, 6vw, 64px);
   max-width: 100%;
   height: auto;
+}
+
+/* Header text styles */
+#headerWrapper header span {
+  font-family: "Figtree", sans-serif;
+  font-weight: 500;
+  color: #d76b9c; /* accessible pink */
+  font-size: 1.5rem;
+  letter-spacing: 0.5px;
+}
+
+/* stronger rule to override other styles if needed */
+#headerWrapper > header > span {
+  font-family: "Figtree", sans-serif, sans-serif;
+  font-weight: 500;
+  color: #d76b9c;
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 0.5rem;
 }
 
 #myButton {
@@ -434,6 +457,88 @@ ul.menuLinks li.active a {
   font-weight: 500;
 }
 
+/* spacing between nav and main content (cards) */
+#mainWrapper {
+  padding-top: 3rem;
+}
+
+/* Footer styling to match header */
+#footerWrapper {
+  background-color: #f8efe0;
+  padding: 1rem;
+}
+
+#footerWrapper footer {
+  max-width: 60rem;
+  margin: 0 auto;
+  color: #333;
+}
+
+.footer-columns {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.footer-columns h3 {
+  margin: 0 0 0.5rem 0;
+}
+
+.footer-columns a {
+  color: green;
+  text-decoration: none;
+}
+
+/* icon styling for Ionicons in footer */
+ion-icon {
+  color: green; /* use green to match nav */
+  padding-right: 5px;
+  vertical-align: middle;
+  font-size: 1.1rem;
+}
+
+/* footer social icon group */
+.social {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: 0.5rem;
+}
+
+.social a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background: transparent;
+  color: green;
+  text-decoration: none;
+}
+
+.social a ion-icon {
+  font-size: 1.2rem;
+  color: inherit;
+}
+
+.copyright {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+@media only screen and (min-width: 35rem) {
+  .footer-columns {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media only screen and (min-width: 60rem) {
+  .footer-columns {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
 @media only screen and (min-width: 35rem) {
   #headerWrapper header img {
     display: block;
@@ -467,11 +572,24 @@ ul.menuLinks li.active a {
     color: white;
     padding: 0.5rem 1rem;
   }
+  /* header text scale at medium */
+  #headerWrapper header span {
+    font-size: 1.5rem;
+  }
+  #navWrapper {
+    /* inherit background-color (mobile-first) to keep nav green across breakpoints */
+  }
 }
 @media only screen and (min-width: 60rem) {
   header, nav, main, footer {
     margin: 0 auto;
     max-width: 60rem;
+  }
+  /* Allow header itself to be full-bleed on large screens */
+  header {
+    max-width: none;
+    margin: 0;
+    width: 100vw;
   }
   #headerWrapper header img {
     display: block;
@@ -481,8 +599,50 @@ ul.menuLinks li.active a {
   #headerWrapper {
     padding: 0.2rem;
   }
+  /* header text scale at large - make the span full-bleed across the viewport */
+  #headerWrapper header span {
+    font-size: 1.75rem;
+    display: block;
+    width: 100vw; /* span the whole viewport */
+    margin-left: 0; /* flush-left */
+    text-align: left;
+    padding: 0.5rem 1rem;
+  }
+  /* make the header background full-width on large screens (avoid 100vw to prevent scrollbars) */
+  #headerWrapper header {
+    background-color: #f8efe0; /* light-cream header background */
+    width: 100%;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    box-sizing: border-box;
+    padding-left: 1rem; /* ensure text doesn't collide with nav */
+    padding-right: 1rem;
+  }
+  /* Large-screen full-bleed tweaks: position the header text flush-left and logo right */
+  /* headerWrapper kept as container; inner header is positioned */
+  /* Use flex layout on large screens to prevent overlap between header text and nav */
+  #headerWrapper header {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  /* higher-specificity selector to ensure it overrides earlier rules */
+  #headerWrapper > header > span {
+    position: static;
+    margin-left: auto; /* push header text to the right */
+    padding: 0.5rem 0;
+    text-align: right;
+    font-size: 2em; /* larger header text on large screens */
+    overflow-wrap: anywhere;
+  }
+  #headerWrapper header img {
+    position: static;
+    margin-left: auto;
+    margin-right: 1rem;
+  }
+  /* nav background is inherited from small (mobile-first) to keep color consistent */
+  /* remove duplicate background declarations */
   #navWrapper {
-    background-color: green;
     padding: 0.002rem;
   }
   div.allcards {
@@ -496,15 +656,27 @@ ul.menuLinks li.active a {
   ul.menuLinks li a {
     padding: 0.4rem 1rem;
   }
+  /* right-align the text of nav links on large screens */
+  ul.menuLinks li a {
+    text-align: right;
+  }
   ul.menuLinks, ul.menuLinks.open {
     display: flex;
-    justify-content: flex-end;
+    justify-content: flex-end; /* right-justify nav on large screens */
+  }
+  /* make the nav sit flush to the right edge of the page with a small gap */
+  nav {
+    padding-right: 0.5rem; /* small padding so menu isn't flush-locked to viewport */
+  }
+  ul.menuLinks {
+    margin-left: auto; /* push the menu to the far right inside the nav */
   }
   ul.menuLinks a:hover {
     background-color: yellow;
   }
   footer div {
     display: grid;
+    padding: 1rem 0;
     grid-template-columns: auto auto auto;
     justify-content: center;
   }

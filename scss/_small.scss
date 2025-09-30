@@ -5,11 +5,11 @@ div.allcards {
     gap: 1.5rem;
 
     section {
-        border: 1px solid $thirdColor;
-        border-radius: 12px;
-        overflow: hidden;
-        background-color: pink;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    border: 1px solid rgba(0,0,0,0.06);
+    border-radius: 12px;
+    overflow: hidden;
+    background-color: #f8efe0;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         transition: transform 0.2s ease, box-shadow 0.2s ease;
 
         h2, p, img {
@@ -63,7 +63,10 @@ div.allcards {
 
 /* Navigation - mobile first */
 #navWrapper {
-    background-color: $secondaryColor;
+    background-color: $secondaryColor; /* green nav on small screens */
+    /* subtle divider to separate nav from main content */
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+    padding-bottom: 0.5rem;
 }
 
 nav {
@@ -75,16 +78,36 @@ nav {
 
 /* Header adjustments for small screens */
 #headerWrapper header {
-    padding: 0.25rem 1rem;
+    padding: 0.75rem 1rem;
     gap: 8px;
+    background-color: #f8efe0; /* light cream header background for contrast */
 }
 
 #headerWrapper header img {
     display: block;
-    /* responsive logo: min 18px, scales with viewport, max 40px */
-    width: clamp(18px, 6vw, 40px);
+    /* responsive logo: larger across all sizes - min 24px, scales with viewport, max 64px */
+    width: clamp(24px, 6vw, 64px);
     max-width: 100%;
     height: auto;
+}
+
+/* Header text styles */
+#headerWrapper header span {
+    font-family: $defaultFont;
+    font-weight: $heavyWeight;
+    color: #d76b9c; /* accessible pink */
+    font-size: 1.5rem;
+    letter-spacing: 0.5px;
+}
+
+/* stronger rule to override other styles if needed */
+#headerWrapper > header > span {
+    font-family: $defaultFont, sans-serif;
+    font-weight: $heavyWeight;
+    color: #d76b9c;
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 0.5rem;
 }
 
 #myButton {
@@ -126,4 +149,100 @@ ul.menuLinks li a {
 ul.menuLinks li.active a {
     background-color: rgba(255,255,255,0.08);
     font-weight: $heavyWeight;
+}
+
+/* spacing between nav and main content (cards) */
+#mainWrapper {
+    padding-top: 3rem;
+}
+
+/* Footer styling to match header */
+#footerWrapper {
+    background-color: #f8efe0;
+    padding: 1rem;
+}
+
+#footerWrapper footer {
+    max-width: 60rem;
+    margin: 0 auto;
+    color: #333;
+}
+
+.footer-columns {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+}
+
+.footer-columns h3 {
+    margin: 0 0 0.5rem 0;
+}
+
+/* add spacing between footer columns sections */
+.footer-columns > div {
+    padding: 0.5rem 0; /* vertical spacing between Contact / Follow / Location */
+}
+
+.footer-columns a {
+    color: $secondaryColor;
+    text-decoration: none;
+}
+
+/* icon styling for Ionicons in footer */
+ion-icon {
+    color: $secondaryColor; /* use green to match nav */
+    padding-right: 5px;
+    vertical-align: middle;
+    font-size: 1.1rem;
+}
+
+/* footer social icon group */
+.social {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    justify-content: flex-start;
+    padding-top: 0.5rem;
+}
+
+.social a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    background: transparent;
+    color: $secondaryColor;
+    text-decoration: none;
+}
+
+.social a ion-icon {
+    font-size: 1.2rem;
+    color: inherit;
+}
+
+/* hover state: turn icons pink */
+.social a:hover,
+.social a:focus {
+    background: rgba(215,107,156,0.06); /* subtle pink halo */
+    color: $primaryColor; /* icon color */
+}
+
+.copyright {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+@media only screen and (min-width: 35rem) {
+    .footer-columns {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media only screen and (min-width: 60rem) {
+    .footer-columns {
+        grid-template-columns: 1fr 1fr 1fr;
+    }
 }

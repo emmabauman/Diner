@@ -3,6 +3,13 @@ header, nav, main, footer {
     max-width: 60rem;
 }
 
+/* Allow header itself to be full-bleed on large screens */
+header {
+    max-width: none;
+    margin: 0;
+    width: 100vw;
+}
+
 #headerWrapper header img {
     display: block;
     /* responsive width controlled in small partial via clamp */
@@ -13,10 +20,58 @@ header, nav, main, footer {
     padding: .2rem;
 }
 
-#navWrapper {
-    background-color: $secondaryColor;
-    padding: .002rem;
-}
+    /* header text scale at large - make the span full-bleed across the viewport */
+    #headerWrapper header span {
+        font-size: 1.75rem;
+        display: block;
+        width: 100vw; /* span the whole viewport */
+        margin-left: 0; /* flush-left */
+        text-align: left;
+        padding: 0.5rem 1rem;
+    }
+
+    /* make the header background full-width on large screens (avoid 100vw to prevent scrollbars) */
+    #headerWrapper header {
+        background-color: #f8efe0; /* light-cream header background */
+        width: 100%;
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+        box-sizing: border-box;
+        padding-left: 1rem; /* ensure text doesn't collide with nav */
+        padding-right: 1rem;
+    }
+
+    /* Large-screen full-bleed tweaks: position the header text flush-left and logo right */
+    /* headerWrapper kept as container; inner header is positioned */
+
+    /* Use flex layout on large screens to prevent overlap between header text and nav */
+    #headerWrapper header {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+    }
+
+    /* higher-specificity selector to ensure it overrides earlier rules */
+    #headerWrapper > header > span {
+        position: static;
+        margin-left: auto; /* push header text to the right */
+        padding: 0.5rem 0;
+        text-align: right;
+        font-size: 2em; /* larger header text on large screens */
+        overflow-wrap: anywhere;
+    }
+
+    #headerWrapper header img {
+        position: static;
+        margin-left: auto;
+        margin-right: 1rem;
+    }
+
+        /* nav background is inherited from small (mobile-first) to keep color consistent */
+        /* remove duplicate background declarations */
+        #navWrapper {
+            padding: .002rem;
+        }
 
 div.allcards {
     display: grid;
@@ -32,10 +87,24 @@ ul.menuLinks li a {
     padding: .4rem 1rem;
 }
 
+/* right-align the text of nav links on large screens */
+ul.menuLinks li a {
+    text-align: right;
+}
+
 ul.menuLinks, ul.menuLinks.open {
     display: flex;
-    justify-content: flex-end;
+    justify-content: flex-end; /* right-justify nav on large screens */
 }
+
+    /* make the nav sit flush to the right edge of the page with a small gap */
+    nav {
+        padding-right: 0.5rem; /* small padding so menu isn't flush-locked to viewport */
+    }
+
+    ul.menuLinks {
+        margin-left: auto; /* push the menu to the far right inside the nav */
+    }
 
 ul.menuLinks a:hover {
     background-color: $thirdColor;
@@ -43,6 +112,7 @@ ul.menuLinks a:hover {
 
 footer div {
     display: grid;
+    padding: 1rem 0;
     grid-template-columns: auto auto auto;
     justify-content: center;
 }
